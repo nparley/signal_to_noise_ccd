@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Signal-to-noise calculator for CCD photometry</title>
+    <link href="static/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<h1>QES Signal-to-noise calculator for CCD photometry</h1>
+
+<p>This form allows you to calculate the signal-to-noise ratio for a star observed with a telescope
+    and CCD. You can vary the parameters and find out what sort of results to expect. </p>
+
+<p>
+    Code adapted by Dr Neil Parley from <a href="http://stupendous.rit.edu/richmond/signal.shtml">
+    http://stupendous.rit.edu/richmond/signal.shtml</a> as a tool to test exposure times for
+    the Qatar Exoplanet Survey. More information about QES can be found at
+    <a href="http://www.qes.qa">www.qes.qa
+</a></p>
+
+{% if form.errors %}
+    <ul class="errors">
+        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+            {% for error in field_errors %}
+                <li><span style="color: red;">{{ form[field_name].label }}: {{ error }}</span></li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<form method="POST" action="">
+    <ul class="form-style-1">
+    {{ form.hidden_tag() }}
+        <li><label>{{ form.filter_name.label }}</label>{{ form.filter_name }}</li>
+        <li><label>{{ form.mag_start.label }}</label>{{ form.mag_start(size=10) }}</li>
+        <li><label>{{ form.mag_end.label }}</label>{{ form.mag_end(size=10) }}</li>
+        <li><label>{{ form.dmag.label }}</label>{{ form.dmag(size=10) }}</li>
+        <li><label>{{ form.tel_diam.label }}</label>{{ form.tel_diam(size=10) }}</li>
+        <li><label>{{ form.obs_diam.label }}</label>{{ form.obs_diam(size=10) }}</li>
+        <li><label>{{ form.qe.label }}</label>{{ form.qe(size=10) }}</li>
+        <li><label>{{ form.pixsize.label }}</label>{{ form.pixsize(size=10) }}</li>
+        <li><label>{{ form.gain.label }}</label>{{ form.gain(size=10) }}</li>
+        <li><label>{{ form.readnoise.label }}</label>{{ form.readnoise(size=10) }}</li>
+        <li><label>{{ form.sat_level.label }}</label>{{ form.sat_level(size=10) }}</li>
+        <li><label>{{ form.skymag.label }}</label>{{ form.skymag(size=10) }}</li>
+        <li><label>{{ form.airmass.label }}</label>{{ form.airmass(size=10) }}</li>
+        <li><label>{{ form.exptime.label }}</label>{{ form.exptime(size=10) }}</li>
+        <li><label>{{ form.fwhm.label }}</label>{{ form.fwhm(size=10) }}</li>
+        <li><label>{{ form.aper_rad.label }}</label>{{ form.aper_rad(size=10) }}</li>
+        <li>{{ form.submit }}</li>
+    </ul>
+</form>
+</body>
+</html>

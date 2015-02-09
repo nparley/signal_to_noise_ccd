@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Signal-to-noise calculator for CCD photometry - results</title>
+    <link href="static/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+# ---------------------------------------------------------- <br/>
+# Results from Signal to noise calculator <br/>
+# Column 1: Magnitude <br/>
+# Column 2: Star ADU <br/>
+# Column 3; Sky ADU <br/>
+# Column 4: Read ADU <br/>
+# Column 5: Signal to Noise <br/>
+# Column 6: Saturated, True or False <br/>
+# ---------------------------------------------------------- <br/>
+{% for result in results %}
+    {% if result.saturated %}
+        <span style="color: red;">
+        {{ result.magnitude }} &nbsp; {{ result.star_adu |round(1)}} &nbsp;
+        {{ result.sky_adu | round(1)}}
+        &nbsp; {{ result.read_adu |round(1) }} &nbsp; {{ result.signal_to_noise |round(1) }} &nbsp;
+        {{ result.saturated }} </span><br/>
+    {% else %}
+        {{ result.magnitude }} &nbsp; {{ result.star_adu |round(1) }}
+        &nbsp; {{ result.sky_adu |round(1)}}
+        &nbsp; {{ result.read_adu |round(1) }} &nbsp; {{ result.signal_to_noise |round(1) }} &nbsp;
+        {{ result.saturated }} <br/>
+    {% endif %}
+
+{% endfor %}
+</body>
+</html>
